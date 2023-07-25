@@ -329,17 +329,16 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2"> <label>Card Number</label></div>
+                    <div class="col-md-2"><label>Card Number</label></div>
                     <div class="col-md-9">
                         <div class="input-space">
                             <input formControlName="cardNumber" type="text">
-
                             <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="creditCardNumber.errors.required">
                                     Card number is required
                                 </div>
-                                <div *ngIf="creditCardNumber.errors.pattern">
-                                    Card number must be 16 digits long
+                                <div *ngIf="creditCardNameOnCard.errors.pattern">
+                                    Card Number  must be 16 digits long
                                 </div>
                             </div>
                         </div>
@@ -347,19 +346,10 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2"> <label>Security Code</label></div>
+                    <div class="col-md-2"><label>Security Code</label></div>
                     <div class="col-md-9">
                         <div class="input-space">
                             <input formControlName="securityCode" type="text">
-
-                            <div *ngIf="creditCardSecurityCode.invalid && (creditCardSecurityCode.dirty || creditCardSecurityCode.touched)" class="alert alert-danger mt-1">
-                                <div *ngIf="creditCardSecurityCode.errors.required">
-                                    Security code is required
-                                </div>
-                                <div *ngIf="creditCardSecurityCode.errors.pattern">
-                                    Security code must be 3 digits long
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>

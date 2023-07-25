@@ -329,17 +329,16 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-2"> <label>Card Number</label></div>
+                    <div class="col-md-2"><label>Card Number</label></div>
                     <div class="col-md-9">
                         <div class="input-space">
                             <input formControlName="cardNumber" type="text">
-
                             <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)" class="alert alert-danger mt-1">
                                 <div *ngIf="creditCardNumber.errors.required">
                                     Card number is required
                                 </div>
-                                <div *ngIf="creditCardNumber.errors.pattern">
-                                    Card number must be 16 digits long
+                                <div *ngIf="creditCardNameOnCard.errors.pattern">
+                                    Card Number  must be 16 digits long
                                 </div>
                             </div>
                         </div>
