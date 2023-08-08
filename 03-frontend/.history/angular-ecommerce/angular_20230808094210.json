@@ -13,16 +13,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "allowedCommonJsDependencies": [
-              "cross-fetch",
-              "p-cancelable",
-              "tiny-emitter",
-              "detect-node",
-              "clipboard",
-              "@sindresorhus/to-milliseconds",
-              "parse-ms",
-              "q"
-            ],
             "outputPath": "dist/angular-ecommerce",
             "index": "src/index.html",
             "main": "src/main.ts",
