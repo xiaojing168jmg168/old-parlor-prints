@@ -3,7 +3,6 @@ Rename as .security-btn
 Change border to 10px */
 
 .security-btn{
-    margin-left: 2px;
     position:relative;
     right:10px;
     min-width:85px;
@@ -13,7 +12,6 @@ Change border to 10px */
     -moz-border-radius:3px;
     border-radius:43px;
     background:#205b8d
-    
 }
 
 /* copy from style.css -> .form-header
@@ -40,4 +38,7 @@ rename as .login-status-user-info
     -o-transition:all .5s ease;
     -moz-transition:all .5s ease;
     transition:all .5s ease
+}
+.member{
+    margin-left: 5px;
 }
