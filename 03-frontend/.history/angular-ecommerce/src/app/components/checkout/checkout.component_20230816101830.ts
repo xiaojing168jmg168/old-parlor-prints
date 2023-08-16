@@ -45,9 +45,6 @@ export class CheckoutComponent implements OnInit {
 
     this.reviewCartDetails();
 
-    // read the user's email address from browser storage
-    const theEmail = JSON.parse(this.storage.getItem('userEmail'));
-
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('',
@@ -60,7 +57,7 @@ export class CheckoutComponent implements OnInit {
           Validators.minLength(2),
           OldParlorValidators.notOnlyWhitespace]),
 
-        email: new FormControl(theEmail,
+        email: new FormControl('',
           [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')])
       }),
       shippingAddress: this.formBuilder.group({
