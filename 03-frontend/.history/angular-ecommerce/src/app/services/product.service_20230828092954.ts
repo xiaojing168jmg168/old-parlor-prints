@@ -13,7 +13,7 @@ export class ProductService {
  
 
   private baseUrl = environment['oldParlorPrintsUrl'] + '/products';
-  private categoryUrl = environment['oldParlorPrintsUrl'] + '/product-category';
+  private categoryUrl = environment['oldParlorPrintsUrl'] + 'product-category';
 
   constructor(private httpClient: HttpClient) { }
 

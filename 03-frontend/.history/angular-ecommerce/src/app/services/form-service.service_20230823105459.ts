@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment.development';
 })
 export class FormServiceService {
   private countriesUrl = environment['oldParlorPrintsUrl'] + '/countries';
-  private statesUrl = environment['oldParlorPrintsUrl'] + '/states';
+  private statesUrl = 'http://localhost:8080/api/states';
 
   constructor(private httpClient: HttpClient) { }
 

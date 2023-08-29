@@ -13,7 +13,7 @@ export class ProductService {
  
 
   private baseUrl = environment['oldParlorPrintsUrl'] + '/products';
-  private categoryUrl = environment['oldParlorPrintsUrl'] + '/product-category';
+  private categoryUrl = environment['oldParlorPrintsUrl'] + 'product-category';
 
   constructor(private httpClient: HttpClient) { }
 
@@ -31,8 +31,6 @@ export class ProductService {
     // build URL based on category id, page and size
     const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`
                       + `&page=${thePage}&size=${thePageSize}`;
-
-    console.log(`Getting products from - ${searchUrl}`);
     return this.httpClient.get<GetResponseProducts>(searchUrl);
   }
 
@@ -55,7 +53,7 @@ export class ProductService {
 // build URL based on keyword, page and size
 const searchUrl = `${this.baseUrl}/search/findByNameContaining?name=${theKeyword}`
   + `&page=${thePage}&size=${thePageSize}`;
-  
+  console.log(`Getting products from - ${searchUrl}`);
 return this.httpClient.get<GetResponseProducts>(searchUrl);
 }
 

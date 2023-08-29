@@ -81,6 +81,9 @@
             "production": {
               "browserTarget": "angular-ecommerce:build:production"
             },
+            "qa":{
+              "browserTarget": "angular-ecommerce:build:qa"
+            },
             "development": {
               "browserTarget": "angular-ecommerce:build:development"
             }
