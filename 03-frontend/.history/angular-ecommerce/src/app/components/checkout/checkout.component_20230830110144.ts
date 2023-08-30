@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Country } from 'src/app/common/country';
 import { Order } from 'src/app/common/order';
 import { OrderItem } from 'src/app/common/order-item';
-import { PaymentInfo } from 'src/app/common/payment-info';
 import { Purchase } from 'src/app/common/purchase';
 import { State } from 'src/app/common/state';
 import { CartService } from 'src/app/services/cart.service';
@@ -38,11 +37,6 @@ export class CheckoutComponent implements OnInit {
 
 // initialize Stripe API
 stripe = Stripe(environment.stripePublishableKey);
-
-paymentInfo: PaymentInfo = new PaymentInfo();
-cardElement: any;
-displayError: any="";
-
   constructor(private formBuilder: FormBuilder,
     private formService: FormServiceService,
     private cartService: CartService,
@@ -50,9 +44,6 @@ displayError: any="";
     private router: Router) { }
 
   ngOnInit(): void {
-    
-    // setup Stripe payment form
-    this.setupStripePaymentForm();
 
     this.reviewCartDetails();
 
@@ -95,7 +86,6 @@ displayError: any="";
         OldParlorValidators.notOnlyWhitespace])
       }),
       creditCard: this.formBuilder.group({
-        /*
         cardType: new FormControl('', [Validators.required]),
         nameOnCard: new FormControl('', [Validators.required, Validators.minLength(2),
         OldParlorValidators.notOnlyWhitespace]),
@@ -103,11 +93,10 @@ displayError: any="";
         securityCode: new FormControl('', [Validators.required, Validators.pattern('[0-9]{3}')]),
         expirationMonth: [''],
         expirationYear: ['']
-        */
       })
     });
 
-    /*// populate credit card months
+    // populate credit card months
 
     const startMonth: number = new Date().getMonth() + 1;
     console.log("startMonth: " + startMonth);
@@ -127,7 +116,6 @@ displayError: any="";
         this.creditCardYears = data;
       }
     );
-    */
 
     // populate countries
 
@@ -137,9 +125,6 @@ displayError: any="";
         this.countries = data;
       }
     );
-  }
-  setupStripePaymentForm() {
-    throw new Error('Method not implemented.');
   }
 
   reviewCartDetails() {
