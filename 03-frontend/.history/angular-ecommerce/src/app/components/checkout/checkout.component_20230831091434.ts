@@ -258,60 +258,26 @@ displayError: any="";
     purchase.order = order;
     purchase.orderItems = orderItems;
 
-    // compute payment info
-    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
-    this.paymentInfo.currency = "USD";
-    console.log(`this.paymentInfo.amount: ${this.paymentInfo.amount}`);
-    // if valid form then
-    // - create payment intent
-    // - confirm card payment
-    // - place order
-
-    if(!this.checkoutFormGroup.invalid && this.displayError.textContent === ""){
-      this.checkoutService.createPaymentIntent(this.paymentInfo).subscribe(
-        (paymentIntentResponse) => {
-          this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
-            {
-              payment_method: {
-                card: this.cardElement,
-                billing_details: {
-                  email: purchase.customer.email,
-                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
-                  address: {
-                    line1: purchase.billingAddress.street,
-                    city: purchase.billingAddress.city,
-                    state: purchase.billingAddress.state,
-                    postal_code: purchase.billingAddress.zipCode,
-                    country: this.billingAddressCountry.value.code
-                  }
-                }
-              }
-            },{handleActions: false})
-            .then((result: any) =>{
-              if(result.error){
-                //inform the customer there was an error
-                alert(`There was an error: ${result.error.message}`)
-              }else{
-                // call REST API via the CheckoutService
-                this.checkoutService.placeOrder(purchase).subscribe({
-                  next: (response: any) => {
-                    alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
-
-                    //reset card
-                    this.resetCart();
-                  },
-                  error: (err: any) => {
-                    alert(`There was an error: ${err.message}`);
-                  }
-                })
-              }
-            });
+    // call REST API via the checkoutService
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: response => {
+          alert(`Your order has been received.\nOrder tracking number: ${response.orderTrackingNumber}`);
+          //reset cart
+          this.resetCart();
+        },
+        error: err => {
+          alert(`There was an error: ${err.message}`);
         }
-      );
-    }else{
-      this.checkoutFormGroup.markAllAsTouched();
-      return;
-    }
+
+      }
+    )
+
+    console.log(this.checkoutFormGroup.get('customer').value);
+    console.log("The email address is " + this.checkoutFormGroup.get('customer').value.email);
+
+    console.log("The shipping address country is " + this.checkoutFormGroup.get('shippingAddress').value.country.name);
+    console.log("The shipping address state is " + this.checkoutFormGroup.get('shippingAddress').value.state.name);
 
   }
   resetCart() {
@@ -319,7 +285,6 @@ displayError: any="";
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    this.cartService.persistCartItems();
 
     // reset the form
     this.checkoutFormGroup.reset();

@@ -259,9 +259,8 @@ displayError: any="";
     purchase.orderItems = orderItems;
 
     // compute payment info
-    this.paymentInfo.amount = Math.round(this.totalPrice * 100);
+    this.paymentInfo.amount = this.totalPrice * 100;
     this.paymentInfo.currency = "USD";
-    console.log(`this.paymentInfo.amount: ${this.paymentInfo.amount}`);
     // if valid form then
     // - create payment intent
     // - confirm card payment
@@ -273,24 +272,13 @@ displayError: any="";
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
             {
               payment_method: {
-                card: this.cardElement,
-                billing_details: {
-                  email: purchase.customer.email,
-                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
-                  address: {
-                    line1: purchase.billingAddress.street,
-                    city: purchase.billingAddress.city,
-                    state: purchase.billingAddress.state,
-                    postal_code: purchase.billingAddress.zipCode,
-                    country: this.billingAddressCountry.value.code
-                  }
-                }
+                card: this.cardElement
               }
             },{handleActions: false})
             .then((result: any) =>{
               if(result.error){
                 //inform the customer there was an error
-                alert(`There was an error: ${result.error.message}`)
+                alert(`There was an error:${result.error.message}`)
               }else{
                 // call REST API via the CheckoutService
                 this.checkoutService.placeOrder(purchase).subscribe({
@@ -319,7 +307,6 @@ displayError: any="";
     this.cartService.cartItems = [];
     this.cartService.totalPrice.next(0);
     this.cartService.totalQuantity.next(0);
-    this.cartService.persistCartItems();
 
     // reset the form
     this.checkoutFormGroup.reset();

@@ -273,18 +273,7 @@ displayError: any="";
           this.stripe.confirmCardPayment(paymentIntentResponse.client_secret,
             {
               payment_method: {
-                card: this.cardElement,
-                billing_details: {
-                  email: purchase.customer.email,
-                  name: `${purchase.customer.firstName} ${purchase.customer.lastName}`,
-                  address: {
-                    line1: purchase.billingAddress.street,
-                    city: purchase.billingAddress.city,
-                    state: purchase.billingAddress.state,
-                    postal_code: purchase.billingAddress.zipCode,
-                    country: this.billingAddressCountry.value.code
-                  }
-                }
+                card: this.cardElement
               }
             },{handleActions: false})
             .then((result: any) =>{
